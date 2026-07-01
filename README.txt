@@ -1,13 +1,31 @@
-Nursing Roadmap Final
+Nursing Roadmap with Firebase Sync
 
-Open locally:
-1. Unzip.
-2. Double-click index.html.
+This version syncs checkmarks across Mac/phone using Google Sign-In + Firestore.
 
-GitHub Pages:
-1. Create a repo.
-2. Upload index.html, style.css, script.js.
-3. Settings > Pages > Deploy from branch > main > root.
-4. Open the github.io URL on any device.
+SETUP:
+1. Go to https://console.firebase.google.com
+2. Create a project.
+3. Project Overview > Web app icon </> > Register app.
+4. Copy the firebaseConfig object into firebase-config.js.
+5. Authentication > Sign-in method > Google > Enable.
+6. Firestore Database > Create database.
+   - Start in production mode if you will add the rules below.
+   - Or test mode temporarily.
+7. Firestore Rules: paste firestore.rules contents and publish.
+8. Upload these files to your GitHub repo:
+   - index.html
+   - style.css
+   - script.js
+   - firebase-config.js
+   - README.txt
+   - firestore.rules (optional, just for reference)
+9. GitHub Pages will serve it.
+10. Open the site, sign in with Google, and checkmarks will sync.
 
-Everything saves checkmarks in the browser using localStorage.
+NOTE:
+Firebase web config is okay to be public. Security comes from Firestore rules and Authentication.
+
+
+Update:
+- ADN focus changed to Spring-entry applications after Fall 2026.
+- Upload the four main files directly to the repo root, not inside a folder.

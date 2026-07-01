@@ -1,3 +1,27 @@
+import { firebaseConfig } from "./firebase-config.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+let currentUser = null;
+let cloudChecks = {};
+let cloudLoaded = false;
+
 const matrix = [
   ["English I","✅","✅","✅","✅","✅","✅","✅","✅","✅","✅ Complete",true],
   ["English II / Critical Thinking","✅","✅","✅","✅","✅","✅","✅","✅","✅","✅ Complete",true],
@@ -38,8 +62,8 @@ const semesters = [
   ["☀️ Summer 2026",["Finish BIO 101 lab/posting","Retake POLS for A","Start COPE","Confirm ADN deadlines"]],
   ["🍂 Fall 2026",["Physiology","Microbiology","Sociology","Continue COPE","Join nursing club if possible"]],
   ["❄️ Winter 2027",["TEAS prep / take if ready","Resume","Essays","Recommendation planning"]],
-  ["🌱 Spring 2027",["Submit ADN applications as windows open","Continue COPE","Only add verified remaining prerequisites"]],
-  ["🌊 Summer / Fall 2027",["Finish any remaining UC/CSU prereqs","UC/CSU applications","Track transcripts and updates"]]
+  ["🌱 Spring 2027",["Apply to ADN programs for Spring-entry cycles where available","Continue COPE","Submit transcripts / TEAS / nursing applications","Only add verified remaining prerequisites"]],
+  ["🌊 Summer / Fall 2027",["Track ADN responses / interviews","Finish any remaining UC/CSU prereqs","UC/CSU applications if continuing that path","Track transcripts and updates"]]
 ];
 
 const deadlines = [
@@ -50,9 +74,9 @@ const deadlines = [
   ["🦅 CSU Los Angeles","Aug 1","Nov 30","NursingCAS: Jan 15","Spring","⬜"],
   ["🌴 CSU Channel Islands","Aug 1","Nov 30","Program-specific nursing requirements","Spring","⬜"],
   ["🏔 CSUN","Aug 1","Nov 30","Program-specific nursing application","Spring","⬜"],
-  ["🏥 Pierce ADN","Feb 15 / Sep 15","Mar 1 / Oct 1","TEAS, transcripts, nursing app","May–Jun or Nov–Dec","⬜"],
-  ["🏥 Valley ADN","Apr 1 / September","Apr 30 / late September","TEAS, prereq eval, transcripts","After cycle","⬜"],
-  ["🏥 LA City ADN","Jul 15 / Jan–Feb","Aug 15 / varies","TEAS, info session, transcripts","After cycle","⬜"]
+  ["🏥 Pierce ADN","Sep 15 spring cycle / Feb 15 fall cycle","Oct 1 / Mar 1","TEAS, transcripts, nursing app","Nov–Dec or May–Jun","⬜"],
+  ["🏥 Valley ADN","September spring cycle / Apr 1 fall cycle","Late Sept / Apr 30","TEAS, prereq eval, transcripts","After cycle","⬜"],
+  ["🏥 LA City ADN","Jul 15 spring cycle / Jan–Feb fall cycle","Aug 15 / varies","TEAS, info session, transcripts","After cycle","⬜"]
 ];
 
 const timeline = [
@@ -63,6 +87,7 @@ const timeline = [
   ["Nov 30 / Dec 1","Submit UC & CSU applications"],
   ["Jan 15","UCLA Nursing Supplemental / CSULA NursingCAS"],
   ["Jan 31","UC TAU"],
+  ["July–Oct","ADN Spring-entry application windows can open/close"],
   ["Feb–Mar","ADN Fall-entry application windows begin"],
   ["Mar 2","Financial aid priority deadline"],
   ["April","Some ADN Fall deadlines close"],
@@ -71,29 +96,82 @@ const timeline = [
   ["July 1","Final UC transcripts if admitted"]
 ];
 
-function saved(id, fallback=false){ return localStorage.getItem(id) === null ? fallback : localStorage.getItem(id) === "true"; }
-function checkbox(id, checked=false){ return `<input class="task" type="checkbox" data-id="${id}" ${saved(id,checked)?"checked":""}>`; }
+function localSaved(id, fallback=false){
+  return localStorage.getItem(id) === null ? fallback : localStorage.getItem(id) === "true";
+}
 
-document.getElementById("matrixRows").innerHTML = matrix.map((r,i)=>`
-<tr>
-<td>${checkbox("matrix"+i,r[10])}</td>
-<td><b>${r[0]}</b></td>
-<td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td>${r[6]}</td><td>${r[7]}</td><td>${r[8]}</td><td>${r[9]}</td>
-<td>${r[10]}</td>
-</tr>`).join("");
+function saved(id, fallback=false){
+  if (currentUser && cloudLoaded) {
+    return cloudChecks[id] === undefined ? fallback : cloudChecks[id] === true;
+  }
+  return localSaved(id, fallback);
+}
 
-document.getElementById("notesRows").innerHTML = notes.map(n=>`<div class="note"><h3>${n[0]}</h3><p>${n[1]}</p></div>`).join("");
+function checkbox(id, checked=false){
+  return `<input class="task" type="checkbox" data-id="${id}" ${saved(id,checked)?"checked":""}>`;
+}
 
-document.getElementById("semesterRows").innerHTML = semesters.map((s,si)=>`
-<div class="semester"><h3>${s[0]}</h3>
-${s[1].map((item,ii)=>`<p>${checkbox("sem"+si+"_"+ii, s[0].includes("Completed"))} ${item}</p>`).join("")}
-</div>`).join("");
+function render(){
+  document.getElementById("matrixRows").innerHTML = matrix.map((r,i)=>`
+  <tr>
+  <td>${checkbox("matrix"+i,r[10])}</td>
+  <td><b>${r[0]}</b></td>
+  <td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td>${r[6]}</td><td>${r[7]}</td><td>${r[8]}</td><td>${r[9]}</td>
+  <td>${r[10]}</td>
+  </tr>`).join("");
 
-document.getElementById("deadlineRows").innerHTML = deadlines.map((d,i)=>`
-<tr><td>${checkbox("dead"+i,false)}</td><td>${d[0]}</td><td>${d[1]}</td><td>${d[2]}</td><td>${d[3]}</td><td>${d[4]}</td><td>${d[5]}</td></tr>`).join("");
+  document.getElementById("notesRows").innerHTML = notes.map(n=>`<div class="note"><h3>${n[0]}</h3><p>${n[1]}</p></div>`).join("");
 
-document.getElementById("timelineRows").innerHTML = timeline.map((t,i)=>`
-<tr><td>${checkbox("time"+i,false)}</td><td><b>${t[0]}</b></td><td>${t[1]}</td></tr>`).join("");
+  document.getElementById("semesterRows").innerHTML = semesters.map((s,si)=>`
+  <div class="semester"><h3>${s[0]}</h3>
+  ${s[1].map((item,ii)=>`<p>${checkbox("sem"+si+"_"+ii, s[0].includes("Completed"))} ${item}</p>`).join("")}
+  </div>`).join("");
+
+  document.getElementById("deadlineRows").innerHTML = deadlines.map((d,i)=>`
+  <tr><td>${checkbox("dead"+i,false)}</td><td>${d[0]}</td><td>${d[1]}</td><td>${d[2]}</td><td>${d[3]}</td><td>${d[4]}</td><td>${d[5]}</td></tr>`).join("");
+
+  document.getElementById("timelineRows").innerHTML = timeline.map((t,i)=>`
+  <tr><td>${checkbox("time"+i,false)}</td><td><b>${t[0]}</b></td><td>${t[1]}</td></tr>`).join("");
+
+  document.querySelectorAll(".task").forEach(b=>{
+    b.addEventListener("change", async ()=>{
+      const id = b.dataset.id;
+      if (currentUser) {
+        cloudChecks[id] = b.checked;
+        await saveCloud();
+      } else {
+        localStorage.setItem(id,b.checked);
+      }
+      updateCount();
+    });
+  });
+  updateCount();
+}
+
+async function saveCloud(){
+  if (!currentUser) return;
+  await setDoc(doc(db, "roadmaps", currentUser.uid), {
+    checks: cloudChecks,
+    updatedAt: new Date().toISOString()
+  }, { merge: true });
+}
+
+async function loadCloud(){
+  if (!currentUser) return;
+  const ref = doc(db, "roadmaps", currentUser.uid);
+  const snap = await getDoc(ref);
+  cloudChecks = snap.exists() && snap.data().checks ? snap.data().checks : {};
+  cloudLoaded = true;
+
+  // First-time login migration: copy local checks into cloud if cloud is empty.
+  if (Object.keys(cloudChecks).length === 0) {
+    document.querySelectorAll(".task").forEach(b=>{
+      const id = b.dataset.id;
+      if (localStorage.getItem(id) !== null) cloudChecks[id] = localStorage.getItem(id) === "true";
+    });
+    await saveCloud();
+  }
+}
 
 function updateCount(){
   const boxes = [...document.querySelectorAll(".task")];
@@ -102,7 +180,32 @@ function updateCount(){
   document.getElementById("totalCount").textContent = boxes.length;
   document.getElementById("progressBar").style.width = boxes.length ? (done/boxes.length*100)+"%" : "0%";
 }
-document.querySelectorAll(".task").forEach(b=>{
-  b.addEventListener("change",()=>{ localStorage.setItem(b.dataset.id,b.checked); updateCount(); });
+
+document.getElementById("signInBtn").addEventListener("click", async ()=>{
+  const provider = new GoogleAuthProvider();
+  await signInWithPopup(auth, provider);
 });
-updateCount();
+
+document.getElementById("signOutBtn").addEventListener("click", async ()=>{
+  await signOut(auth);
+});
+
+onAuthStateChanged(auth, async (user)=>{
+  currentUser = user;
+  cloudLoaded = false;
+  if (user) {
+    document.getElementById("signInBtn").style.display = "none";
+    document.getElementById("signOutBtn").style.display = "inline-block";
+    document.getElementById("userStatus").textContent = `Signed in as ${user.email}. Checkmarks sync across devices.`;
+    render();
+    await loadCloud();
+    render();
+  } else {
+    document.getElementById("signInBtn").style.display = "inline-block";
+    document.getElementById("signOutBtn").style.display = "none";
+    document.getElementById("userStatus").textContent = "Not signed in — checkmarks save only on this device.";
+    cloudChecks = {};
+    cloudLoaded = false;
+    render();
+  }
+});

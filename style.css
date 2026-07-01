@@ -34,3 +34,24 @@ input[type="checkbox"]{width:22px;height:22px;accent-color:#151515}
   .stats,.notes-grid,.semester-grid{grid-template-columns:1fr}
   main{padding:16px}.hero h2{font-size:30px}.hero h3{font-size:24px}
 }
+
+.loginbar{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+  background:#f3efe7;
+  border-radius:16px;
+  padding:14px;
+  margin-bottom:22px;
+}
+.loginbar button{
+  padding:10px 14px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:#151515;
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+}
+#userStatus{color:var(--muted);font-size:14px}
