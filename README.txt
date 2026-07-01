@@ -29,3 +29,9 @@ Firebase web config is okay to be public. Security comes from Firestore rules an
 Update:
 - ADN focus changed to Spring-entry applications after Fall 2026.
 - Upload the four main files directly to the repo root, not inside a folder.
+
+
+Update:
+- Added This Week command center.
+- COPE clearances due next week.
+- COPE dates listed as July 11, July 12, and July 18.

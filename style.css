@@ -55,3 +55,23 @@ input[type="checkbox"]{width:22px;height:22px;accent-color:#151515}
   cursor:pointer;
 }
 #userStatus{color:var(--muted);font-size:14px}
+
+.urgent{
+  border: 2px solid #151515;
+}
+.task-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+.task-card{
+  background:#f3efe7;
+  border-radius:18px;
+  padding:18px;
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+}
+.task-card strong{display:block;margin-bottom:6px}
+.task-card span{color:var(--muted);font-size:14px}
+@media(max-width:850px){.task-grid{grid-template-columns:1fr}}

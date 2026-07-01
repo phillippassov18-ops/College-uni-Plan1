@@ -59,7 +59,7 @@ const notes = [
 
 const semesters = [
   ["✅ Completed",["English I","English II / Critical Thinking","Statistics A","General Psychology","Lifespan Psychology","Public Speaking","BIO 006","Anatomy B","CHEM 051 A"]],
-  ["☀️ Summer 2026",["Finish BIO 101 lab/posting","Retake POLS for A","Start COPE","Confirm ADN deadlines"]],
+  ["☀️ Summer 2026",["Complete COPE clearances by next week","COPE dates: July 11, July 12, July 18","Finish BIO 101 lab/posting","Retake POLS for A","Confirm ADN deadlines"]],
   ["🍂 Fall 2026",["Physiology","Microbiology","Sociology","Continue COPE","Join nursing club if possible"]],
   ["❄️ Winter 2027",["TEAS prep / take if ready","Resume","Essays","Recommendation planning"]],
   ["🌱 Spring 2027",["Apply to ADN programs for Spring-entry cycles where available","Continue COPE","Submit transcripts / TEAS / nursing applications","Only add verified remaining prerequisites"]],
@@ -77,6 +77,17 @@ const deadlines = [
   ["🏥 Pierce ADN","Sep 15 spring cycle / Feb 15 fall cycle","Oct 1 / Mar 1","TEAS, transcripts, nursing app","Nov–Dec or May–Jun","⬜"],
   ["🏥 Valley ADN","September spring cycle / Apr 1 fall cycle","Late Sept / Apr 30","TEAS, prereq eval, transcripts","After cycle","⬜"],
   ["🏥 LA City ADN","Jul 15 spring cycle / Jan–Feb fall cycle","Aug 15 / varies","TEAS, info session, transcripts","After cycle","⬜"]
+];
+
+const thisWeek = [
+  ["Complete COPE clearances", "Due next week — highest priority"],
+  ["Verify all COPE documents are submitted", "Check portal/email confirmation"],
+  ["Confirm COPE dates", "July 11, July 12, July 18"],
+  ["Upload final roadmap files to GitHub root", "index.html, style.css, script.js, firebase-config.js"],
+  ["Test Firebase login + synced checkmarks", "Mac + phone"],
+  ["Finish BIO 101 lab / transcript posting", "Counts as completed once posted"],
+  ["Stay on POLS retake", "Target A"],
+  ["Confirm Fall registration", "Physiology + Microbiology + Sociology"]
 ];
 
 const timeline = [
@@ -112,7 +123,14 @@ function checkbox(id, checked=false){
 }
 
 function render(){
-  document.getElementById("matrixRows").innerHTML = matrix.map((r,i)=>`
+  document.getElementById("thisWeekRows").innerHTML = thisWeek.map((t,i)=>`
+  <div class="task-card">
+    ${checkbox("week"+i,false)}
+    <div><strong>${t[0]}</strong><span>${t[1]}</span></div>
+  </div>
+`).join("");
+
+document.getElementById("matrixRows").innerHTML = matrix.map((r,i)=>`
   <tr>
   <td>${checkbox("matrix"+i,r[10])}</td>
   <td><b>${r[0]}</b></td>
