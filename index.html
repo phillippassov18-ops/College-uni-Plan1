@@ -22,7 +22,7 @@
     <h1>Choose Workspace</h1>
     <div class="workspace-grid">
       <button class="workspace-card" onclick="showScreen('music')">
-        <span>🎵</span><strong>Music</strong><small>Shows, venues, content, Anybody Anywhere</small>
+        <span>🎵</span><strong>Music</strong><small>Live shows + studio releases</small>
       </button>
       <button class="workspace-card" onclick="showScreen('school')">
         <span>🎓</span><strong>Nursing</strong><small>COPE, prerequisites, ADN/CSU/UC timeline</small>
@@ -35,10 +35,11 @@
   <nav class="subnav">
     <button onclick="goHome()">← Home</button>
     <a href="#music-dashboard">Dashboard</a>
-    <a href="#music-month">July Goals</a>
-    <a href="#music-show">July 11 Show</a>
-    <a href="#music-venues">Venues</a>
-    <a href="#music-content">Content</a>
+    <a href="#july">July</a>
+    <a href="#august">August</a>
+    <a href="#september">September</a>
+    <a href="#venues">Venues</a>
+    <a href="#short-term">Short-Term</a>
   </nav>
 
   <section id="music-dashboard" class="card hero">
@@ -46,32 +47,65 @@
     <h1><span id="musicDone">0</span> checks completed out of <span id="musicTotal">0</span></h1>
     <div class="progress"><div id="musicBar"></div></div>
     <div class="stats">
-      <div><span>July Shows</span><strong>1 / 3</strong></div>
-      <div><span>August Shows</span><strong>0 / 3</strong></div>
+      <div><span>Live Shows</span><strong>0 / 9</strong></div>
+      <div><span>Songs Released</span><strong>0 / 3</strong></div>
       <div><span>New Venues</span><strong>0 / 5</strong></div>
       <div><span>Main Show</span><strong>July 11</strong></div>
     </div>
   </section>
 
-  <section id="music-month" class="card">
-    <h2>🎯 July / August Goals</h2>
-    <div class="task-grid" id="musicGoals"></div>
+  <section id="july" class="card">
+    <h2>☀️ July 2026</h2>
+    <div class="two-col">
+      <div>
+        <h3>🎤 Live</h3>
+        <div class="task-grid single" id="julyLive"></div>
+      </div>
+      <div>
+        <h3>🎙 Studio</h3>
+        <div class="task-grid single" id="julyStudio"></div>
+      </div>
+    </div>
   </section>
 
-  <section id="music-show" class="card">
-    <h2>🎤 July 11 Show</h2>
-    <div class="task-grid" id="showTasks"></div>
+  <section id="august" class="card">
+    <h2>🌴 August 2026</h2>
+    <div class="two-col">
+      <div>
+        <h3>🎤 Live</h3>
+        <div class="task-grid single" id="augustLive"></div>
+      </div>
+      <div>
+        <h3>🎙 Studio</h3>
+        <div class="task-grid single" id="augustStudio"></div>
+      </div>
+    </div>
   </section>
 
-  <section id="music-venues" class="card">
+  <section id="september" class="card">
+    <h2>🍂 September 2026</h2>
+    <div class="two-col">
+      <div>
+        <h3>🎤 Live</h3>
+        <div class="task-grid single" id="septemberLive"></div>
+      </div>
+      <div>
+        <h3>🎙 Studio</h3>
+        <div class="task-grid single" id="septemberStudio"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="venues" class="card">
     <h2>🏛 Valley / LA Venue Outreach</h2>
-    <p class="muted">Goal: find 5 more venues around the Valley and LA. Ventura Music stays as the current lead.</p>
+    <p class="muted">Goal: find 5 more venues around the Valley and LA. Ventura Music stays as the current July 11 lead.</p>
     <div class="venue-grid" id="venueCards"></div>
   </section>
 
-  <section id="music-content" class="card">
-    <h2>🎥 Content / Promotion</h2>
-    <div class="task-grid" id="contentTasks"></div>
+  <section id="short-term" class="card">
+    <h2>🎥 Short-Term Content</h2>
+    <p class="muted">MuzArt is short-term, not the monthly recording goal.</p>
+    <div class="task-grid" id="shortTermTasks"></div>
   </section>
 </main>
 

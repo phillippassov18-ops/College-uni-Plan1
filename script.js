@@ -17,32 +17,51 @@ window.showScreen = (id) => {
 };
 window.goHome = () => window.showScreen("home");
 
-const musicGoals = [
-  ["Venue confirmed", "Lock the July 11 show location"],
-  ["Flyer for July 11 show", "Create and post the flyer"],
-  ["Rehearsals with Asaf set", "Schedule rehearsals and lock the set"],
-  ["Promotion for show", "Announcement, stories, reels, countdown"],
-  ["Finish MuzArt vid 2", "Complete edit and get it out"],
-  ["Anybody Anywhere vids out", "Release the first performance clips"],
+const julyLive = [
+  ["July 11 show", "Ventura Music lead / first July event"],
   ["Book July Show #2", "Second July show confirmed"],
   ["Book July Show #3", "Third July show confirmed"],
-  ["Book August Show #1", "First August show confirmed"],
-  ["Book August Show #2", "Second August show confirmed"],
-  ["Book August Show #3", "Third August show confirmed"],
-  ["Find 5 more venues", "Valley / LA venue outreach"]
+  ["July 11 flyer", "Create and post official flyer"],
+  ["Rehearsals with Asaf set", "Schedule rehearsals and lock set"],
+  ["Promotion for July 11", "Announcement, stories, reels, countdown"]
 ];
 
-const showTasks = [
-  ["Meet venue guy", "Build relationship and talk logistics"],
-  ["Date confirmed", "July 11 Saturday locked"],
-  ["Start time confirmed", "Doors / music time"],
-  ["PA / gear confirmed", "Know what to bring"],
-  ["Lineup finalized", "Artists confirmed"],
-  ["Flyer finished", "Ready to post"],
-  ["Announcement posted", "Feed / reel / story"],
-  ["Rehearsal complete", "Asaf / set prepared"],
-  ["Film plan confirmed", "Vertical and horizontal footage"],
-  ["Post-show recap", "Turn show into content"]
+const julyStudio = [
+  ["Release Song #1", "First of 3 song releases"],
+  ["Song #1 artwork / asset", "Cover or visual ready"],
+  ["Song #1 promo reel", "Short-form promo"],
+  ["Song #1 release post", "Post on release day"]
+];
+
+const augustLive = [
+  ["August Show #1", "Booked and confirmed"],
+  ["August Show #2", "Booked and confirmed"],
+  ["August Show #3", "Booked and confirmed"],
+  ["Promote August shows", "Flyers, reels, reminders"],
+  ["Meet 10 musicians", "Build network"],
+  ["Lock September venues", "Keep pipeline moving"]
+];
+
+const augustStudio = [
+  ["Release Song #2", "Second of 3 song releases"],
+  ["Song #2 artwork / asset", "Cover or visual ready"],
+  ["Song #2 promo reel", "Short-form promo"],
+  ["Song #2 release post", "Post on release day"]
+];
+
+const septemberLive = [
+  ["September Show #1", "Booked and confirmed"],
+  ["September Show #2", "Booked and confirmed"],
+  ["September Show #3", "Booked and confirmed"],
+  ["Promote September shows", "Flyers, reels, reminders"],
+  ["Book October shows", "Do not enter October empty"]
+];
+
+const septemberStudio = [
+  ["Release Song #3", "Third of 3 song releases"],
+  ["Song #3 artwork / asset", "Cover or visual ready"],
+  ["Song #3 promo reel", "Short-form promo"],
+  ["Song #3 release post", "Post on release day"]
 ];
 
 const venues = [
@@ -54,16 +73,13 @@ const venues = [
   ["Venue #6", "Valley / LA", "Find contact + message"]
 ];
 
-const contentTasks = [
-  ["July 11 flyer posted", "Main announcement"],
-  ["Countdown story", "48 hours before"],
-  ["Day-of stories", "Load-in / soundcheck / crowd"],
-  ["Post-show recap", "Next day"],
-  ["MuzArt Video #2 complete", "Finish and post"],
-  ["Anybody Anywhere Video #1", "Upload"],
-  ["Anybody Anywhere Video #2", "Upload"],
-  ["Anybody Anywhere Video #3", "Upload"],
-  ["20 July IG posts/reels", "Monthly content target"]
+const shortTermTasks = [
+  ["Finish MuzArt Video #2", "Short-term video goal"],
+  ["Anybody Anywhere Video #1", "Release performance clip"],
+  ["Anybody Anywhere Video #2", "Release performance clip"],
+  ["Anybody Anywhere Video #3", "Release performance clip"],
+  ["Post 20 July IG posts/reels", "Keep content moving"],
+  ["Post-show recap", "Turn July 11 into content"]
 ];
 
 const schoolWeek = [
@@ -174,9 +190,14 @@ function taskCards(target, data, prefix, group){
 }
 
 function render(){
-  taskCards("musicGoals", musicGoals, "musicGoal", "music");
-  taskCards("showTasks", showTasks, "showTask", "music");
-  taskCards("contentTasks", contentTasks, "contentTask", "music");
+  taskCards("julyLive", julyLive, "julyLive", "music");
+  taskCards("julyStudio", julyStudio, "julyStudio", "music");
+  taskCards("augustLive", augustLive, "augustLive", "music");
+  taskCards("augustStudio", augustStudio, "augustStudio", "music");
+  taskCards("septemberLive", septemberLive, "septemberLive", "music");
+  taskCards("septemberStudio", septemberStudio, "septemberStudio", "music");
+  taskCards("shortTermTasks", shortTermTasks, "shortTerm", "music");
+
   document.getElementById("venueCards").innerHTML = venues.map((v,i)=>`
     <div class="venue-card">
       <h3>${v[0]}</h3>
