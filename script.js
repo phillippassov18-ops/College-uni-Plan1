@@ -68,41 +68,60 @@ const contentTasks = [
 
 const schoolWeek = [
   ["Complete COPE clearances", "Due next week — highest priority"],
-  ["Verify COPE docs submitted", "Portal/email confirmation"],
-  ["Confirm COPE dates", "July 11, July 12, July 18"],
-  ["Finish BIO 101 lab / posting", "Counts as completed once posted"],
-  ["Stay on POLS retake", "Target A"],
-  ["Confirm Fall registration", "Physiology + Microbiology + Sociology"]
+  ["Verify all COPE documents submitted", "Portal / email confirmation"],
+  ["Attend COPE July 11", "COPE Health Scholars"],
+  ["Attend COPE July 12", "COPE Health Scholars"],
+  ["Attend COPE July 18", "COPE Health Scholars"],
+  ["Finish BIO 101 Lab", "Posts to transcript after lab"],
+  ["Retake POLS", "Target A"],
+  ["Register Physiology", "Fall 2026"],
+  ["Register Microbiology", "Fall 2026"],
+  ["Register Sociology", "Fall 2026"]
 ];
 
 const matrix = [
-  ["English I","✅","✅","✅","✅","✅","✅","✅","✅","✅","✅ Complete",true],
-  ["English II / Critical Thinking","✅","✅","✅","✅","✅","✅","✅","✅","✅","✅ Complete",true],
-  ["Statistics","✅","✅","✅","✅","✅","✅","✅","✅","✅","✅ A",true],
-  ["General Psychology","✅","✅","✅","✅","✅","✅","✅","⭐","✅","✅ Complete",true],
-  ["Lifespan Psychology","✅","✅","✅","⭐","⭐","⭐","⭐","⭐","⭐","✅ Complete",true],
-  ["Public Speaking","⭐","⭐","⭐","✅","✅","✅","✅","⭐","➖","✅ Complete",true],
-  ["BIO 101","⭐","⭐","⭐","⭐","⭐","⭐","⭐","➖","➖","✅ after lab posts",false],
-  ["BIO 006","➖","➖","➖","➖","➖","➖","➖","✅","✅","✅ Complete",true],
-  ["Human Anatomy","✅","✅","✅","✅","✅","✅","✅","✅","✅","✅ B",true],
-  ["Human Physiology","✅","✅","✅","✅","✅","✅","✅","✅","✅","🟡 Fall 2026",false],
-  ["Microbiology","✅","✅","✅","✅","✅","✅","✅","⭐","✅","🟡 Fall 2026",false],
-  ["Sociology","⭐","⭐","⭐","✅","✅","✅","⭐","➖","✅","🟡 Fall 2026",false],
-  ["CHEM 051","✅","✅","✅","✅","➖","❓","✅","❌","❌","✅ A",true],
-  ["CHEM 101","❌","❌","❌","❓","✅","❓","❓","✅","✅","❓ verify",false],
-  ["CHEM 102","❌","❌","❌","❌","❌","❌","❌","✅","✅","🔴 not taken",false],
-  ["CHEM 211","❌","❌","❌","❌","✅","❌","❌","✅","➖","🔴 not taken",false],
-  ["BIO 007","❌","❌","❌","❌","❌","❌","❌","✅","➖","❓ verify",false],
-  ["TEAS","✅","✅","✅","⭐","⭐","⭐","⭐","❌","❌","🔴 not taken",false],
-  ["COPE / Clinical Experience","⭐","⭐","⭐","⭐","⭐","⭐","⭐","⭐","⭐","🟡 starts July",false]
+  ["English I","✅","✅","✅","✅","✅","✅","✅","✅","✅","✅","✅ Complete",true],
+  ["English II / Critical Thinking","✅","✅","✅","✅","✅","✅","✅","✅","✅","✅","✅ Complete",true],
+  ["Statistics","✅","✅","✅","✅","✅","✅","✅","✅","✅","✅","✅ A",true],
+  ["General Psychology","✅","✅","✅","✅","✅","✅","✅","✅","⭐","✅","✅ Complete",true],
+  ["Lifespan Psychology","✅","✅","✅","⭐","⭐","⭐","⭐","⭐","⭐","⭐","✅ Complete",true],
+  ["Public Speaking","⭐","⭐","⭐","✅","✅","✅","✅","✅","⭐","➖","✅ Complete",true],
+  ["BIO 101","⭐","⭐","⭐","⭐","⭐","⭐","⭐","⭐","➖","➖","✅ after lab posts",false],
+  ["BIO 006","➖","➖","➖","➖","➖","➖","➖","➖","✅","✅","✅ Complete",true],
+  ["Human Anatomy","✅","✅","✅","✅","✅","✅","✅","✅","✅","✅","✅ B",true],
+  ["Human Physiology","✅","✅","✅","✅","✅","✅","✅","✅","✅","✅","🟡 Fall 2026",false],
+  ["Microbiology","✅","✅","✅","✅","✅","✅","✅","✅","⭐","✅","🟡 Fall 2026",false],
+  ["Sociology","⭐","⭐","⭐","⭐","✅","✅","✅","⭐","➖","✅","🟡 Fall 2026",false],
+  ["CHEM 051","✅","✅","✅","✅","✅","➖","❓","✅","❌","❌","✅ A",true],
+  ["CHEM 101","❌","❌","❌","❓","❓","✅","❓","❓","✅","✅","❓ verify",false],
+  ["CHEM 102","❌","❌","❌","❌","❌","❌","❌","❌","✅","✅","🔴 not taken",false],
+  ["CHEM 211","❌","❌","❌","❌","❌","✅","❌","❌","✅","➖","🔴 not taken",false],
+  ["BIO 007","❌","❌","❌","❌","❌","❌","❌","❌","✅","➖","❓ verify",false],
+  ["Genetics","❌","❌","❌","❌","❌","❌","❌","❌","➖","⭐","🔴 not taken",false],
+  ["Public Health","❌","❌","❌","❌","❌","❌","❌","❌","➖","⭐","🔴 not taken",false],
+  ["Nutrition","⭐","⭐","⭐","⭐","⭐","⭐","⭐","⭐","➖","⭐","🔴 verify",false],
+  ["TEAS","✅","✅","✅","⭐","⭐","⭐","⭐","⭐","❌","❌","🔴 not taken",false],
+  ["COPE / Clinical Experience","⭐","⭐","⭐","⭐","⭐","⭐","⭐","⭐","⭐","⭐","🟡 starts July",false]
+];
+
+const schoolNotes = [
+  ["🏛 UCLA", "Full IGETC. All seven non-nursing prep courses by spring before transfer. Most demanding chemistry/biology sequence. Most competitive."],
+  ["🏛 UC Irvine", "Strong science prep. Genetics/Public Health may matter. Keep open if the extra coursework is worth it."],
+  ["🌊 CSULB", "Heavy science GPA emphasis. Chemistry equivalency needs careful verification."],
+  ["🟠 CSUF", "Good fit with current coursework. Allied-health chemistry pathway appears favorable."],
+  ["🌴 CSUCI", "Good target. Chemistry articulation is different, so verify before registering for extra chemistry."],
+  ["🦅 CSULA", "Good local CSU option. Sociology/Nutrition-style support courses may matter depending on final program rules."],
+  ["🏔 CSUN", "Need correct current traditional BSN route verified; RN-to-BSN is a separate backup path after ADN/RN."],
+  ["🏥 ADN Programs", "TEAS required. Science GPA matters. Fastest RN path, then bridge to BSN later."]
 ];
 
 const semesters = [
   ["✅ Completed",["English I","English II / Critical Thinking","Statistics A","General Psychology","Lifespan Psychology","Public Speaking","BIO 006","Anatomy B","CHEM 051 A"]],
-  ["☀️ Summer 2026",["Complete COPE clearances by next week","COPE dates: July 11, July 12, July 18","Finish BIO 101 lab/posting","Retake POLS for A"]],
+  ["☀️ Summer 2026",["Complete COPE clearances by next week","COPE dates: July 11, July 12, July 18","Finish BIO 101 lab/posting","Retake POLS for A","Confirm ADN deadlines"]],
   ["🍂 Fall 2026",["Physiology","Microbiology","Sociology","Continue COPE","Join nursing club if possible"]],
   ["❄️ Winter 2027",["TEAS prep / take if ready","Resume","Essays","Recommendation planning"]],
-  ["🌱 Spring 2027",["Apply to ADN programs for Spring-entry cycles where available","Continue COPE","Submit transcripts / TEAS / nursing applications","Only add verified remaining prerequisites"]]
+  ["🌱 Spring 2027",["Apply to ADN programs for Spring-entry cycles where available","Continue COPE","Submit transcripts / TEAS / nursing applications","Only add verified remaining prerequisites"]],
+  ["🌊 Summer / Fall 2027",["Track ADN responses / interviews","Finish remaining verified UC/CSU prerequisites","Submit UC/CSU applications if continuing that path","Track transcripts and updates"]]
 ];
 
 const deadlines = [
@@ -116,6 +135,23 @@ const deadlines = [
   ["Pierce ADN","Sep 15 / Feb 15","Oct 1 / Mar 1","TEAS, transcripts, nursing app","Nov–Dec or May–Jun"],
   ["Valley ADN","September / Apr 1","Late Sept / Apr 30","TEAS, prereq eval, transcripts","After cycle"],
   ["LA City ADN","Jul 15 / Jan–Feb","Aug 15 / varies","TEAS, info session, transcripts","After cycle"]
+];
+
+const timeline = [
+  ["July", "Continue COPE / summer classes"],
+  ["Aug 1", "UC & CSU applications open"],
+  ["September", "Begin essays / resume"],
+  ["Oct 1", "FAFSA/CADAA opens"],
+  ["Nov 30 / Dec 1", "Submit UC & CSU applications"],
+  ["Jan 15", "UCLA Nursing Supplemental / CSULA NursingCAS"],
+  ["Jan 31", "UC TAU"],
+  ["July–Oct", "ADN Spring-entry application windows can open/close"],
+  ["Feb–Mar", "ADN Fall-entry application windows begin"],
+  ["Mar 2", "Financial aid priority deadline"],
+  ["April", "Some ADN Fall deadlines close"],
+  ["May–June", "Many ADN decisions"],
+  ["June 1", "UC SIR if admitted"],
+  ["July 1", "Final UC transcripts if admitted"]
 ];
 
 function localSaved(id, fallback=false){
@@ -155,11 +191,12 @@ function render(){
   taskCards("schoolWeek", schoolWeek, "schoolWeek", "school");
   document.getElementById("matrixRows").innerHTML = matrix.map((r,i)=>`
     <tr>
-      <td>${checkbox("matrix"+i,r[10],"school")}</td>
+      <td>${checkbox("matrix"+i,r[11],"school")}</td>
       <td><b>${r[0]}</b></td>
-      <td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td>${r[6]}</td><td>${r[7]}</td><td>${r[8]}</td><td>${r[9]}</td><td>${r[10]}</td>
+      <td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td>${r[6]}</td><td>${r[7]}</td><td>${r[8]}</td><td>${r[9]}</td><td>${r[10]}</td><td>${r[11]}</td>
     </tr>
   `).join("");
+  document.getElementById("schoolNotes").innerHTML = schoolNotes.map(n=>`<div class="note"><h3>${n[0]}</h3><p>${n[1]}</p></div>`).join("");
   document.getElementById("semesterRows").innerHTML = semesters.map((s,si)=>`
     <div class="semester"><h3>${s[0]}</h3>
     ${s[1].map((item,ii)=>`<p>${checkbox("sem"+si+"_"+ii,s[0].includes("Completed"),"school")} ${item}</p>`).join("")}
@@ -167,6 +204,9 @@ function render(){
   `).join("");
   document.getElementById("deadlineRows").innerHTML = deadlines.map((d,i)=>`
     <tr><td>${checkbox("deadline"+i,false,"school")}</td><td>${d[0]}</td><td>${d[1]}</td><td>${d[2]}</td><td>${d[3]}</td><td>${d[4]}</td></tr>
+  `).join("");
+  document.getElementById("timelineRows").innerHTML = timeline.map((t,i)=>`
+    <tr><td>${checkbox("timeline"+i,false,"school")}</td><td><b>${t[0]}</b></td><td>${t[1]}</td></tr>
   `).join("");
 
   document.querySelectorAll(".task").forEach(b=>{

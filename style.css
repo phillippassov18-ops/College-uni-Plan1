@@ -12,7 +12,7 @@ button{font:inherit;border:0;border-radius:14px;padding:12px 16px;background:#15
 .auth button{background:white;color:#151515}
 .auth span{font-size:13px;opacity:.8}
 .hidden{display:none!important}
-.screen{display:none;padding:32px;max-width:1450px;margin:0 auto}
+.screen{display:none;padding:32px;max-width:1500px;margin:0 auto}
 .screen.active{display:block}
 .landing-card{min-height:calc(100vh - 130px);display:flex;flex-direction:column;justify-content:center;background:var(--card);border:1px solid var(--line);border-radius:30px;padding:48px;box-shadow:0 10px 30px #0000000a}
 .eyebrow{text-transform:uppercase;letter-spacing:.15em;color:var(--muted);font-weight:900;font-size:12px}
@@ -29,22 +29,22 @@ button{font:inherit;border:0;border-radius:14px;padding:12px 16px;background:#15
 .progress{height:20px;border-radius:999px;background:#ebe5d8;overflow:hidden;margin:0 0 28px}
 .progress div{height:100%;width:0%;background:#151515;border-radius:999px;transition:.2s}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.stats div,.task-card,.semester,.venue-card{background:#f3efe7;border-radius:18px;padding:20px}
+.stats div,.task-card,.semester,.venue-card,.note{background:#f3efe7;border-radius:18px;padding:20px}
 .stats span{display:block;color:var(--muted);font-size:12px;margin-bottom:7px}
 .stats strong{font-size:20px}
 h2{font-size:28px;margin-top:0}
 .muted{color:var(--muted)}
-.task-grid,.semester-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.task-grid,.semester-grid,.notes-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
 .task-card{display:flex;gap:12px;align-items:flex-start}
 .task-card strong{display:block;margin-bottom:6px}
-.task-card span{color:var(--muted);font-size:14px}
+.task-card span,.note p{color:var(--muted);font-size:14px}
 input[type=checkbox]{width:22px;height:22px;accent-color:#151515;flex:none}
 .urgent{border:2px solid #151515}
 .venue-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-.venue-card h3{margin-top:0}
+.venue-card h3,.note h3{margin-top:0}
 .venue-card p{margin:8px 0;color:var(--muted)}
 .table-wrap{overflow:auto}
-table{width:100%;border-collapse:separate;border-spacing:0 12px;min-width:1050px}
+table{width:100%;border-collapse:separate;border-spacing:0 12px;min-width:1200px}
 th{text-align:left;color:var(--muted);font-size:13px;padding:0 14px;white-space:nowrap}
 td{background:#f3efe7;padding:18px 14px;vertical-align:top}
 td:first-child{border-radius:14px 0 0 14px}
@@ -54,6 +54,6 @@ td:last-child{border-radius:0 14px 14px 0}
   .screen{padding:16px}
   .landing-card{padding:28px;min-height:calc(100vh - 180px)}
   .landing-card h1,.hero h1{font-size:34px}
-  .workspace-grid,.stats,.task-grid,.semester-grid,.venue-grid{grid-template-columns:1fr}
+  .workspace-grid,.stats,.task-grid,.semester-grid,.venue-grid,.notes-grid{grid-template-columns:1fr}
   .subnav{position:relative;top:0}
 }
