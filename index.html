@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Phil OS</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Phil OS v5</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 <header class="topbar">
@@ -21,166 +21,107 @@
     <p class="eyebrow">Welcome back, Phil</p>
     <h1>Choose Workspace</h1>
     <div class="workspace-grid">
-      <button class="workspace-card" onclick="showScreen('music')">
-        <span>🎵</span><strong>Music</strong><small>Live shows + studio releases</small>
-      </button>
-      <button class="workspace-card" onclick="showScreen('school')">
-        <span>🎓</span><strong>Nursing</strong><small>COPE, prerequisites, ADN/CSU/UC timeline</small>
-      </button>
+      <button class="workspace-card" onclick="showScreen('musicDash')"><span>🎵</span><strong>Music</strong><small>Shows, venues, releases, content</small></button>
+      <button class="workspace-card" onclick="showScreen('school')"><span>🎓</span><strong>Nursing</strong><small>COPE, prereqs, applications</small></button>
     </div>
   </section>
 </main>
 
-<main id="music" class="screen">
+<main id="musicDash" class="screen">
   <nav class="subnav">
     <button onclick="goHome()">← Home</button>
-    <a href="#music-dashboard">Dashboard</a>
-    <a href="#july">July</a>
-    <a href="#august">August</a>
-    <a href="#september">September</a>
-    <a href="#venues">Venues</a>
-    <a href="#short-term">Short-Term</a>
+    <a onclick="showScreen('musicDash')">Dashboard</a>
+    <a onclick="showScreen('musicJuly')">July</a>
+    <a onclick="showScreen('musicAugust')">August</a>
+    <a onclick="showScreen('musicSeptember')">September</a>
+    <a onclick="showScreen('musicVenues')">Venue CRM</a>
+    <a onclick="showScreen('musicSongs')">Song Catalog</a>
+    <a onclick="showScreen('musicCalendar')">Calendar</a>
+    <a onclick="showScreen('musicContacts')">Contacts</a>
+    <a onclick="showScreen('musicMoney')">Finances</a>
   </nav>
-
-  <section id="music-dashboard" class="card hero">
+  <section class="card hero">
     <p class="eyebrow">Music Dashboard</p>
     <h1><span id="musicDone">0</span> checks completed out of <span id="musicTotal">0</span></h1>
     <div class="progress"><div id="musicBar"></div></div>
     <div class="stats">
-      <div><span>Live Shows</span><strong>0 / 9</strong></div>
-      <div><span>Songs Released</span><strong>0 / 3</strong></div>
-      <div><span>New Venues</span><strong>0 / 5</strong></div>
-      <div><span>Main Show</span><strong>July 11</strong></div>
+      <div><span>Shows</span><strong>0 / 9</strong></div>
+      <div><span>Songs</span><strong>0 / 3</strong></div>
+      <div><span>Venues</span><strong>0 / 5</strong></div>
+      <div><span>Short-Term</span><strong>MuzArt + AA</strong></div>
     </div>
   </section>
+  <section class="card"><h2>🎯 Quarter Goals</h2><div class="task-grid" id="quarterGoals"></div></section>
+</main>
 
-  <section id="july" class="card">
-    <h2>☀️ July 2026</h2>
-    <div class="two-col">
-      <div>
-        <h3>🎤 Live</h3>
-        <div class="task-grid single" id="julyLive"></div>
-      </div>
-      <div>
-        <h3>🎙 Studio</h3>
-        <div class="task-grid single" id="julyStudio"></div>
-      </div>
-    </div>
-  </section>
+<main id="musicJuly" class="screen month">
+  <nav class="subnav"><button onclick="showScreen('musicDash')">← Music</button><a onclick="showScreen('musicAugust')">August →</a></nav>
+  <section class="card hero"><p class="eyebrow">July 2026</p><h1><span id="julyDone">0</span> / <span id="julyTotal">0</span> July tasks</h1><div class="progress"><div id="julyBar"></div></div></section>
+  <section class="card"><div class="two-col"><div><h2>🎤 Live</h2><div class="task-grid single" id="julyLive"></div></div><div><h2>🎙 Studio</h2><div class="task-grid single" id="julyStudio"></div></div></div></section>
+  <section class="card"><h2>📣 Promotion / Content</h2><div class="task-grid" id="julyPromo"></div></section>
+</main>
 
-  <section id="august" class="card">
-    <h2>🌴 August 2026</h2>
-    <div class="two-col">
-      <div>
-        <h3>🎤 Live</h3>
-        <div class="task-grid single" id="augustLive"></div>
-      </div>
-      <div>
-        <h3>🎙 Studio</h3>
-        <div class="task-grid single" id="augustStudio"></div>
-      </div>
-    </div>
-  </section>
+<main id="musicAugust" class="screen month">
+  <nav class="subnav"><button onclick="showScreen('musicDash')">← Music</button><a onclick="showScreen('musicJuly')">← July</a><a onclick="showScreen('musicSeptember')">September →</a></nav>
+  <section class="card hero"><p class="eyebrow">August 2026</p><h1><span id="augustDone">0</span> / <span id="augustTotal">0</span> August tasks</h1><div class="progress"><div id="augustBar"></div></div></section>
+  <section class="card"><div class="two-col"><div><h2>🎤 Live</h2><div class="task-grid single" id="augustLive"></div></div><div><h2>🎙 Studio</h2><div class="task-grid single" id="augustStudio"></div></div></div></section>
+  <section class="card"><h2>📣 Promotion / Networking</h2><div class="task-grid" id="augustPromo"></div></section>
+</main>
 
-  <section id="september" class="card">
-    <h2>🍂 September 2026</h2>
-    <div class="two-col">
-      <div>
-        <h3>🎤 Live</h3>
-        <div class="task-grid single" id="septemberLive"></div>
-      </div>
-      <div>
-        <h3>🎙 Studio</h3>
-        <div class="task-grid single" id="septemberStudio"></div>
-      </div>
-    </div>
-  </section>
+<main id="musicSeptember" class="screen month">
+  <nav class="subnav"><button onclick="showScreen('musicDash')">← Music</button><a onclick="showScreen('musicAugust')">← August</a></nav>
+  <section class="card hero"><p class="eyebrow">September 2026</p><h1><span id="septemberDone">0</span> / <span id="septemberTotal">0</span> September tasks</h1><div class="progress"><div id="septemberBar"></div></div></section>
+  <section class="card"><div class="two-col"><div><h2>🎤 Live</h2><div class="task-grid single" id="septemberLive"></div></div><div><h2>🎙 Studio</h2><div class="task-grid single" id="septemberStudio"></div></div></div></section>
+  <section class="card"><h2>📣 Promotion / Pipeline</h2><div class="task-grid" id="septemberPromo"></div></section>
+</main>
 
-  <section id="venues" class="card">
-    <h2>🏛 Valley / LA Venue Outreach</h2>
-    <p class="muted">Goal: find 5 more venues around the Valley and LA. Ventura Music stays as the current July 11 lead.</p>
-    <div class="venue-grid" id="venueCards"></div>
-  </section>
+<main id="musicVenues" class="screen">
+  <nav class="subnav"><button onclick="showScreen('musicDash')">← Music</button></nav>
+  <section class="card hero"><p class="eyebrow">Venue CRM</p><h1>5 new Valley / LA venues</h1></section>
+  <section class="card"><div class="venue-grid" id="venueCards"></div></section>
+</main>
 
-  <section id="short-term" class="card">
-    <h2>🎥 Short-Term Content</h2>
-    <p class="muted">MuzArt is short-term, not the monthly recording goal.</p>
-    <div class="task-grid" id="shortTermTasks"></div>
-  </section>
+<main id="musicSongs" class="screen">
+  <nav class="subnav"><button onclick="showScreen('musicDash')">← Music</button></nav>
+  <section class="card hero"><p class="eyebrow">Song Catalog</p><h1>Writing → Recording → Mixing → Mastering → Released</h1></section>
+  <section class="card"><div class="song-grid" id="songCards"></div></section>
+</main>
+
+<main id="musicCalendar" class="screen">
+  <nav class="subnav"><button onclick="showScreen('musicDash')">← Music</button></nav>
+  <section class="card hero"><p class="eyebrow">Calendar</p><h1>Shows + release dates</h1></section>
+  <section class="card"><div class="task-grid" id="calendarTasks"></div></section>
+</main>
+
+<main id="musicContacts" class="screen">
+  <nav class="subnav"><button onclick="showScreen('musicDash')">← Music</button></nav>
+  <section class="card hero"><p class="eyebrow">Contacts</p><h1>Venues, musicians, photographers, promoters</h1></section>
+  <section class="card"><div class="task-grid" id="contactTasks"></div></section>
+</main>
+
+<main id="musicMoney" class="screen">
+  <nav class="subnav"><button onclick="showScreen('musicDash')">← Music</button></nav>
+  <section class="card hero"><p class="eyebrow">Show Finances</p><h1>Pay, merch, expenses</h1></section>
+  <section class="card"><div class="task-grid" id="moneyTasks"></div></section>
 </main>
 
 <main id="school" class="screen">
   <nav class="subnav">
     <button onclick="goHome()">← Home</button>
-    <a href="#school-dashboard">Dashboard</a>
-    <a href="#school-week">This Week</a>
-    <a href="#school-matrix">Master Table</a>
-    <a href="#school-notes">Key Notes</a>
-    <a href="#school-semester">Semester Plan</a>
-    <a href="#school-deadlines">Deadlines</a>
+    <a href="#school-dashboard">Dashboard</a><a href="#school-week">This Week</a><a href="#school-matrix">Master Table</a><a href="#school-semester">Semester Plan</a><a href="#school-deadlines">Deadlines</a>
   </nav>
-
   <section id="school-dashboard" class="card hero">
     <p class="eyebrow">Nursing Progress</p>
     <h1><span id="schoolDone">0</span> checks completed out of <span id="schoolTotal">0</span></h1>
     <div class="progress"><div id="schoolBar"></div></div>
     <div class="stats">
-      <div><span>GPA</span><strong>3.33</strong></div>
-      <div><span>Fall 2026</span><strong>Physio + Micro + Soc</strong></div>
-      <div><span>BIO 101</span><strong>Done after lab posts</strong></div>
-      <div><span>COPE</span><strong>July 11, 12, 18</strong></div>
+      <div><span>GPA</span><strong>3.33</strong></div><div><span>Fall 2026</span><strong>Physio + Micro + Soc</strong></div><div><span>BIO 101</span><strong>Done after lab posts</strong></div><div><span>COPE</span><strong>July 11, 12, 18</strong></div>
     </div>
   </section>
-
-  <section id="school-week" class="card urgent">
-    <h2>🔥 This Week Command Center</h2>
-    <div class="task-grid" id="schoolWeek"></div>
-  </section>
-
-  <section id="school-matrix" class="card">
-    <h2>📚 Master Prerequisite Comparison</h2>
-    <p class="muted">Legend: ✅ required/done · ⭐ recommended/program-dependent · ➖ not generally required · ❌ not part of pathway · ❓ verify</p>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Done</th><th>Prereq</th><th>Pierce</th><th>Valley</th><th>LA City</th><th>CSUN</th><th>CSULA</th><th>CSUCI</th><th>CSULB</th><th>CSUF</th><th>UCLA</th><th>UCI</th><th>Status</th>
-          </tr>
-        </thead>
-        <tbody id="matrixRows"></tbody>
-      </table>
-    </div>
-  </section>
-
-  <section id="school-notes" class="card">
-    <h2>📌 Important Keys</h2>
-    <div class="notes-grid" id="schoolNotes"></div>
-  </section>
-
-  <section id="school-semester" class="card">
-    <h2>📅 Semester-by-Semester Breakdown</h2>
-    <div class="semester-grid" id="semesterRows"></div>
-  </section>
-
-  <section id="school-deadlines" class="card">
-    <h2>📆 Master Deadlines</h2>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th>Done</th><th>School</th><th>Opens</th><th>Due</th><th>Supplemental / Extra</th><th>Decision</th></tr>
-        </thead>
-        <tbody id="deadlineRows"></tbody>
-      </table>
-    </div>
-
-    <h2>📌 Universal Timeline</h2>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Done</th><th>Date</th><th>Task</th></tr></thead>
-        <tbody id="timelineRows"></tbody>
-      </table>
-    </div>
-  </section>
+  <section id="school-week" class="card urgent"><h2>🔥 This Week Command Center</h2><div class="task-grid" id="schoolWeek"></div></section>
+  <section id="school-matrix" class="card"><h2>📚 Master Prerequisite Comparison</h2><div class="table-wrap"><table><thead><tr><th>Done</th><th>Prereq</th><th>Pierce</th><th>Valley</th><th>LA City</th><th>CSUN</th><th>CSULA</th><th>CSUCI</th><th>CSULB</th><th>CSUF</th><th>UCLA</th><th>UCI</th><th>Status</th></tr></thead><tbody id="matrixRows"></tbody></table></div></section>
+  <section id="school-semester" class="card"><h2>📅 Semester-by-Semester Breakdown</h2><div class="semester-grid" id="semesterRows"></div></section>
+  <section id="school-deadlines" class="card"><h2>📆 Master Deadlines</h2><div class="table-wrap"><table><thead><tr><th>Done</th><th>School</th><th>Opens</th><th>Due</th><th>Extra</th><th>Decision</th></tr></thead><tbody id="deadlineRows"></tbody></table></div></section>
 </main>
 
 <script type="module" src="script.js"></script>
