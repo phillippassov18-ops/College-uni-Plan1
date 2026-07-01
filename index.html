@@ -1,18 +1,144 @@
-<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Phil OS</title><link rel='stylesheet' href='style.css'></head>
-<body><div class='top'><b>⚡ Phil OS</b><span><button id='signInBtn'>Sign in with Google</button><button id='signOutBtn' style='display:none'>Sign out</button> <small id='userStatus'>Not signed in — saves on this device only.</small></span></div>
-<section id='home' class='home'><div class='homecard'><p class='eyebrow'>Choose workspace</p><h1>What are we working on?</h1><div class='choices'><button onclick="showWorkspace('music')">🎵 Music</button><button onclick="showWorkspace('school')">🎓 School</button></div></div></section>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Phil OS</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand" onclick="goHome()">⚡ Phil OS</div>
+    <div class="auth">
+      <button id="signInBtn">Sign in with Google</button>
+      <button id="signOutBtn" class="hidden">Sign out</button>
+      <span id="userStatus">Not signed in — saves on this device only.</span>
+    </div>
+  </header>
 
-<section id='music' class='workspace'><aside><h2>🎵 Music</h2><button onclick='showHome()'>← Home</button><a href='#mdash'>Dashboard</a><a href='#mtasks'>Checklist</a><a href='#venues'>Venues</a><a href='#show'>July 11 Show</a></aside><main>
-<section id='mdash' class='card hero'><p class='eyebrow'>July Music Dashboard</p><h1><span id='musicDone'>0</span> checks completed out of <span id='musicTotal'>0</span></h1><div class='progress'><div id='musicBar'></div></div><div class='stats'><div><span>July Shows</span><b>1 / 3 target</b></div><div><span>August Shows</span><b>0 / 3 booked</b></div><div><span>New Venues</span><b>0 / 5 target</b></div><div><span>Main Event</span><b>July 11</b></div></div></section>
-<section id='mtasks' class='card'><h2>🔥 Music Checklist</h2><div class='taskgrid' id='musicTasks'></div></section>
-<section id='venues' class='card'><h2>🏛 Valley / LA Venue Outreach</h2><p class='muted'>Goal: find and build relationships with 5 more venues around the Valley and LA.</p><div class='taskgrid' id='venueTasks'></div></section>
-<section id='show' class='card'><h2>🎤 July 11 Show</h2><div class='taskgrid' id='showTasks'></div></section>
-</main></section>
+  <main id="home" class="screen active">
+    <section class="landing-card">
+      <p class="eyebrow">Welcome back, Phil</p>
+      <h1>Choose Workspace</h1>
+      <div class="workspace-grid">
+        <button class="workspace-card" onclick="showScreen('music')">
+          <span>🎵</span>
+          <strong>Music</strong>
+          <small>Shows, venues, content, Anybody Anywhere</small>
+        </button>
+        <button class="workspace-card" onclick="showScreen('school')">
+          <span>🎓</span>
+          <strong>Nursing</strong>
+          <small>COPE, prerequisites, ADN/CSU/UC timeline</small>
+        </button>
+      </div>
+    </section>
+  </main>
 
-<section id='school' class='workspace'><aside><h2>🎓 School</h2><button onclick='showHome()'>← Home</button><a href='#sdash'>Dashboard</a><a href='#week'>This Week</a><a href='#matrix'>Master Table</a><a href='#semester'>Semester Plan</a><a href='#deadlines'>Deadlines</a></aside><main>
-<section id='sdash' class='card hero'><p class='eyebrow'>School Progress</p><h1><span id='schoolDone'>0</span> checks completed out of <span id='schoolTotal'>0</span></h1><div class='progress'><div id='schoolBar'></div></div><div class='stats'><div><span>GPA</span><b>3.33</b></div><div><span>Fall 2026</span><b>Physio + Micro + Soc</b></div><div><span>BIO 101</span><b>Done after lab posts</b></div><div><span>COPE</span><b>July 11, 12, 18</b></div></div></section>
-<section id='week' class='card urgent'><h2>🔥 This Week Command Center</h2><div class='taskgrid' id='schoolWeek'></div></section>
-<section id='matrix' class='card'><h2>📚 Master Prerequisite Comparison</h2><div class='tablewrap'><table><thead><tr><th>Done</th><th>Prereq</th><th>Pierce</th><th>Valley</th><th>LA City</th><th>CSULA</th><th>CSUCI</th><th>CSULB</th><th>CSUF</th><th>UCLA</th><th>UCI</th><th>Status</th></tr></thead><tbody id='matrixRows'></tbody></table></div></section>
-<section id='semester' class='card'><h2>📅 Semester-by-Semester</h2><div class='semgrid' id='semesterRows'></div></section>
-<section id='deadlines' class='card'><h2>📆 Master Deadlines</h2><div class='tablewrap'><table><thead><tr><th>Done</th><th>School</th><th>Opens</th><th>Due</th><th>Extra</th><th>Decision</th></tr></thead><tbody id='deadlineRows'></tbody></table></div></section>
-</main></section><script type='module' src='script.js'></script></body></html>
+  <main id="music" class="screen">
+    <nav class="subnav">
+      <button onclick="goHome()">← Home</button>
+      <a href="#music-dashboard">Dashboard</a>
+      <a href="#music-month">July Goals</a>
+      <a href="#music-show">July 11 Show</a>
+      <a href="#music-venues">Venues</a>
+      <a href="#music-content">Content</a>
+    </nav>
+
+    <section id="music-dashboard" class="card hero">
+      <p class="eyebrow">Music Dashboard</p>
+      <h1><span id="musicDone">0</span> checks completed out of <span id="musicTotal">0</span></h1>
+      <div class="progress"><div id="musicBar"></div></div>
+      <div class="stats">
+        <div><span>July Shows</span><strong>1 / 3</strong></div>
+        <div><span>August Shows</span><strong>0 / 3</strong></div>
+        <div><span>New Venues</span><strong>0 / 5</strong></div>
+        <div><span>Main Show</span><strong>July 11</strong></div>
+      </div>
+    </section>
+
+    <section id="music-month" class="card">
+      <h2>🎯 July / August Goals</h2>
+      <div class="task-grid" id="musicGoals"></div>
+    </section>
+
+    <section id="music-show" class="card">
+      <h2>🎤 July 11 Show</h2>
+      <div class="task-grid" id="showTasks"></div>
+    </section>
+
+    <section id="music-venues" class="card">
+      <h2>🏛 Valley / LA Venue Outreach</h2>
+      <p class="muted">Goal: find 5 more venues around the Valley and LA. Ventura Music stays as the current lead.</p>
+      <div class="venue-grid" id="venueCards"></div>
+    </section>
+
+    <section id="music-content" class="card">
+      <h2>🎥 Content / Promotion</h2>
+      <div class="task-grid" id="contentTasks"></div>
+    </section>
+  </main>
+
+  <main id="school" class="screen">
+    <nav class="subnav">
+      <button onclick="goHome()">← Home</button>
+      <a href="#school-dashboard">Dashboard</a>
+      <a href="#school-week">This Week</a>
+      <a href="#school-matrix">Master Table</a>
+      <a href="#school-semester">Semester Plan</a>
+      <a href="#school-deadlines">Deadlines</a>
+    </nav>
+
+    <section id="school-dashboard" class="card hero">
+      <p class="eyebrow">Nursing Progress</p>
+      <h1><span id="schoolDone">0</span> checks completed out of <span id="schoolTotal">0</span></h1>
+      <div class="progress"><div id="schoolBar"></div></div>
+      <div class="stats">
+        <div><span>GPA</span><strong>3.33</strong></div>
+        <div><span>Fall 2026</span><strong>Physio + Micro + Soc</strong></div>
+        <div><span>BIO 101</span><strong>Done after lab posts</strong></div>
+        <div><span>COPE</span><strong>July 11, 12, 18</strong></div>
+      </div>
+    </section>
+
+    <section id="school-week" class="card urgent">
+      <h2>🔥 This Week Command Center</h2>
+      <div class="task-grid" id="schoolWeek"></div>
+    </section>
+
+    <section id="school-matrix" class="card">
+      <h2>📚 Master Prerequisite Comparison</h2>
+      <p class="muted">Legend: ✅ required/done · ⭐ recommended/program-dependent · ➖ not generally required · ❌ not part of pathway · ❓ verify</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Done</th><th>Prereq</th><th>Pierce</th><th>Valley</th><th>LA City</th><th>CSULA</th><th>CSUCI</th><th>CSULB</th><th>CSUF</th><th>UCLA</th><th>UCI</th><th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="matrixRows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="school-semester" class="card">
+      <h2>📅 Semester-by-Semester Breakdown</h2>
+      <div class="semester-grid" id="semesterRows"></div>
+    </section>
+
+    <section id="school-deadlines" class="card">
+      <h2>📆 Master Deadlines</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Done</th><th>School</th><th>Opens</th><th>Due</th><th>Supplemental / Extra</th><th>Decision</th></tr>
+          </thead>
+          <tbody id="deadlineRows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
