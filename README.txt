@@ -1,1 +1,0 @@
-Upload these directly to the GitHub repo root: index.html, style.css, script.js, firebase-config.js. This adds Music + School workspace chooser, Valley/LA venue goal, July/August show booking goals.
